@@ -11,6 +11,10 @@ pipeline {
                     // Determine the branch
                     def branchName = env.GIT_BRANCH
 
+                    // Make build.sh executable
+                    sh '''chmod +x build.sh
+                          chmod +x deploy.sh'''
+
                     // Run the build and deploy scripts based on the branch
                     if (branchName == 'origin/dev') {
                         sh './build.sh'
