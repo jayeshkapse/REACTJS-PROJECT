@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_USERNAME = credentials('jkapse51').username
+        DOCKER_PASSWORD = credentials('dckr_pat_l7GLM8LvJCisqfE7_CwLswIYF4Y').password
+    }
+
     stages {
         stage('Build and Deploy') {
             steps {
@@ -10,10 +15,6 @@ pipeline {
 
                     // Determine the branch
                     def branchName = env.GIT_BRANCH
-
-                    // Make build.sh executable
-                    sh '''chmod +x build.sh
-                          chmod +x deploy.sh'''
 
                     // Run the build and deploy scripts based on the branch
                     if (branchName == 'origin/dev') {
