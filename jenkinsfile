@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_USERNAME = credentials('jkapse51').username
-        DOCKER_PASSWORD = credentials('dckr_pat_l7GLM8LvJCisqfE7_CwLswIYF4Y').password
+        $DOCKER_USERNAME = credentials('jkapse51').username
+        $DOCKER_PASSWORD = credentials('dckr_pat_l7GLM8LvJCisqfE7_CwLswIYF4Y').password
     }
 
     stages {
