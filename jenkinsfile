@@ -13,11 +13,15 @@ pipeline {
 
                     // Run the build and deploy scripts based on the branch
                     if (branchName == 'origin/dev') {
+                        sh 'chmod +x ./build.sh'
                         sh './build.sh'
+                        sh 'chmod +x ./deploy.sh'
                         sh './deploy.sh dev'
                     } else if (branchName == 'origin/main') {
+                        sh 'chmod +x ./build.sh'
                         sh './build.sh'
-                        sh './deploy.sh prod'
+                        sh 'chmod +x ./deploy.sh'
+                        sh './deploy.sh prod''
                     } else {
                         echo "Skipping build and deploy for branch ${branchName}"
                     }
