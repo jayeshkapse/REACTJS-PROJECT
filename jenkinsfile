@@ -21,7 +21,7 @@ pipeline {
                         sh 'chmod +x ./build.sh'
                         sh './build.sh'
                         sh 'chmod +x ./deploy.sh'
-                        sh './deploy.sh prod''
+                        sh './deploy.sh prod'
                     } else {
                         echo "Skipping build and deploy for branch ${branchName}"
                     }
