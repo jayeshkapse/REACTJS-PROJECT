@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   reactapp:
-    image: docker-repo
+    image: jkapse51/prod:docker-repo
     ports:
       - "3000:80"
 
