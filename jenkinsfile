@@ -15,13 +15,15 @@ pipeline {
                     if (branchName == 'origin/dev') {
                         sh 'docker build -t reactimg .'
                         sh 'docker-compose up'
+                        sh 'docker-compose down'
                         sh 'chmod +x ./build.sh'
                         sh './build.sh'
                         sh 'chmod +x ./deploy.sh'
                         sh './deploy.sh dev'
                     } else if (branchName == 'origin/main') {
                         sh 'docker build -t reactimg .'
-                        sh 'docker-compose up'
+                        sh 'docker-compose up' 
+                        sh 'docker-compose down'
                         sh 'chmod +x ./build.sh'
                         sh './build.sh'
                         sh 'chmod +x ./deploy.sh'
