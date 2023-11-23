@@ -14,14 +14,14 @@ pipeline {
                     // Run the build and deploy scripts based on the branch
                     if (branchName == 'origin/dev') {
                         sh 'docker build -t reactimg .'
-                        sh 'docker-compose up'
+                        sh 'docker-compose up -d'
                         sh 'chmod +x ./build.sh'
                         sh './build.sh'
                         sh 'chmod +x ./deploy.sh'
                         sh './deploy.sh dev'
                     } else if (branchName == 'origin/main') {
                         sh 'docker build -t reactimg .'
-                        sh 'docker-compose up'
+                        sh 'docker-compose up -d'
                         sh 'chmod +x ./build.sh'
                         sh './build.sh'
                         sh 'chmod +x ./deploy.sh'
