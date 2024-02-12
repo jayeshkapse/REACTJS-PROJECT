@@ -23,7 +23,7 @@ pipeline {
       emailext(
         subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
         body: "The pipeline ${currentBuild.fullDisplayName} completed successfully.",
-        to: 'shrirangjoshisj3@gmail.com',
+        to: 'jkapse51@gmail.com',
         attachLog: true
       )
     }
