@@ -1,28 +1,39 @@
 pipeline {
-    agent any
+  agent any
 
-    stages {
-        stage('Build and Deploy') {
-            steps {
-                script {
-                    // Checkout the code from Git
-                    checkout scm
+  stages {
+    stage('Build and Deploy') {
+      steps {
+        script {
+          // Checkout the code from Git
+          checkout scm
 
-                    // Determine the branch
-                    def branchName = env.GIT_BRANCH
+          // Determine the branch
+          def branchName = env.GIT_BRANCH
 
-                    // Run the build and deploy scripts based on the branch
-                    if (branchName == 'origin/dev') {
-                        sh 'chmod +x ./deploy.sh'
-                        sh './deploy.sh dev'
-                    } else if (branchName == 'origin/main') {
-                        sh 'chmod +x ./deploy.sh'
-                        sh './deploy.sh prod'
-                    } else {
-                        echo "Skipping build and deploy for branch ${branchName}"
-                    }
-                }
-            }
+          // Run the build and deploy scripts based on the branch
+          sh "./deploy.sh ${branchName == 'origin/dev' ? 'dev' : 'prod'}"
         }
+      }
     }
+  }
+
+  post {
+    success {
+      emailext(
+        subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
+        body: "The pipeline ${currentBuild.fullDisplayName} completed successfully.",
+        to: 'shrirangjoshisj3@gmail.com',
+        attachLog: true
+      )
+    }
+    failure {
+      emailext(
+        subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
+        body: "The pipeline ${currentBuild.fullDisplayName} failed.",
+        to: 'jkapse51@gmail.com',
+        attachLog: true
+      )
+    }
+  }
 }
